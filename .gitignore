@@ -1,0 +1,12 @@
+# ENVIRONMENT
+assets/*
+.env
+
+# PYTHON
+**/.venv/**
+**/__pycache__/**
+
+# JS
+**/node_modules/**
+**/dist/**
+**/build/**
