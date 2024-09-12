@@ -46,12 +46,20 @@ def insert_data_to_mongo(collection, data):
             "High": row['High'],
             "Low": row['Low'],
             "Close": row['Close'],
-            "Volume": row['Volume']
+            "Adj Close": row['Adj Close'],
+            "Volume": row['Volume'],
         }
         records.append(record)
     
-    if records:
-        db[collection].insert_many(records)
+    if len(records):
+        lastInsertedItem = db[collection].find_one(sort=[("Datetime", -1)])
+        to_insert_records = []
+        if lastInsertedItem:
+            to_insert_records = [record for record in records if record["Datetime"] > lastInsertedItem["Datetime"]]
+        else:
+            to_insert_records = records
+
+        db[collection].insert_many(to_insert_records)
         print(f"Inserted {len(records)} records in {collection}")
 
 if __name__ == "__main__":

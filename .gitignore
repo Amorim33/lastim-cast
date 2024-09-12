@@ -10,3 +10,6 @@ assets/*
 **/node_modules/**
 **/dist/**
 **/build/**
+
+# Models
+**/models/**

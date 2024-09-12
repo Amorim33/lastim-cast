@@ -8,7 +8,6 @@ from sklearn.preprocessing import MinMaxScaler
 
 from lib.collections import interval_historical_collections, interval_predicted_collections
 from lib.database import db
-from lib.model import create_model
 
 seq_length = 10
 scaler = MinMaxScaler(feature_range=(0, 1))
@@ -58,7 +57,7 @@ def retrain_model(interval, epochs=50, batch_size=32, is_first_train=True):
         data_points = list(db[collection].find().sort("Datetime", -1).skip(int(total_count * 0.1)))
         data_points.reverse()
     
-    if len(data_points) < seq_length:
+    if len(data_points) <= seq_length:
         print('Not enough data points')
         return
 

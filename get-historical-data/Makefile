@@ -16,7 +16,7 @@ help:
 	@echo "  make run    - Get historical data for the given interval"
 	@echo "  make help   - Show this help message"
 
-# Run the Streamlit application
+# Get historical data
 run:
 	$(PYTHON) $(MAIN_APP)
 
