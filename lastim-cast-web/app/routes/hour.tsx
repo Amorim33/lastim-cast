@@ -81,21 +81,64 @@ export async function loader() {
 export default function Hour() {
   const { options } = useLoaderData<typeof loader>();
   return (
-    <div
-      style={{
-        width: "90%",
-        margin: "0 auto",
-      }}
-    >
-      <ClientOnly fallback={<Fallback />}>
-        {() => (
-          <HighchartsReact
-            highcharts={Highcharts}
-            options={options}
-            constructorType="stockChart"
-          />
-        )}
-      </ClientOnly>
+    <div className="min-h-screen bg-white flex flex-col">
+      <header className="flex items-center justify-between p-6">
+        <h1 className="text-3xl font-bold text-gray-800">
+          <a
+            href="/"
+            className="text-gray-800 hover:text-blue-500 transition duration-300"
+          >
+            LaSTiM Cast
+          </a>
+        </h1>
+        <nav>
+          <ul className="flex space-x-6">
+            <li>
+              <a
+                href="/day"
+                className="text-gray-600 hover:text-blue-500 transition duration-300"
+              >
+                Dia
+              </a>
+            </li>
+            <li>
+              <a
+                href="/hour"
+                className="text-gray-600 hover:text-green-500 transition duration-300"
+              >
+                Hora
+              </a>
+            </li>
+            <li>
+              <a
+                href="/minute"
+                className="text-gray-600 hover:text-purple-500 transition duration-300"
+              >
+                Minuto
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+
+      <main className="flex-grow flex items-center justify-center">
+        <div className="w-11/12 mx-auto">
+          <ClientOnly fallback={<Fallback />}>
+            {() => (
+              <HighchartsReact
+                highcharts={Highcharts}
+                options={options}
+                constructorType="stockChart"
+                containerProps={{ className: "h-full w-full" }}
+              />
+            )}
+          </ClientOnly>
+        </div>
+      </main>
+
+      <footer className="text-center p-6 text-gray-500">
+        © 2024 LaSTiM Cast. Todos os direitos reservados.
+      </footer>
     </div>
   );
 }
